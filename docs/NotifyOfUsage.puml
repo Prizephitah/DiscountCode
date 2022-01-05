@@ -1,0 +1,44 @@
+@startuml
+actor User
+autoactivate on
+
+User -> Apache: getCode(brand, userInfo)
+Apache -> API: route(request)
+API -> UserAuthenticator: authenticate(user)
+return authenticationResult
+API -> CodeController: getCode(brand, userInfo)
+database PostgreSQL
+CodeController -> PostgreSQL: query
+return result
+CodeController -> CodeValidator: validate(code)
+return validationResult
+
+CodeController -> BrandController: notify(brand, userInfo)
+CodeController --> API: code
+deactivate CodeController
+queue Redis
+BrandController -> Redis: push(usage)
+deactivate BrandController
+deactivate Redis
+
+API --> Apache: response
+Apache --> User: code
+
+...
+
+loop
+NotificationController -> Redis: pop()
+return usage
+end
+NotificationController -> NotificationController: composeMessage(usages)
+return message
+Entity MailService
+NotificationController -> MailService: send(message)
+return id
+
+...
+
+actor Brand
+MailService -> Brand: send(mail)
+
+@enduml

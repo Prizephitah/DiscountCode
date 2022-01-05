@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+
+actor Brand
+
+package DiscountCode {
+    component Apache
+
+    component "PHP-FPM" as FPM {
+        interface API
+        interface CodeController
+        interface CodeValidator
+        interface UserAuthenticator
+    }
+
+    database PostgreSQL
+
+    Brand --> Apache: 1. Generate Code
+    Apache --> API: 2. Forward Request
+    API --> UserAuthenticator: 3. Validate Brand
+    API --> CodeController: 4. Generate Code
+    CodeController --> CodeValidator: 5. Validate
+    CodeController --> PostgreSQL: 6. Store Code
+    CodeController -[dashed]-> API: 7. Return Code
+    API -[dashed]-> Apache: 8. Return Response
+    Apache -[dashed]-> Brand: 9. Return Code
+}
+@enduml

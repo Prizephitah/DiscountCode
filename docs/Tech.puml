@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+
+Entity MailService
+
+package DiscountCode {
+    component Apache
+    component "PHP-FPM" as FPM
+    database PostgreSQL
+    queue Redis
+    Apache --> FPM
+    FPM --> PostgreSQL
+    FPM --> Redis
+    FPM --> MailService
+}
+
+
+@enduml
