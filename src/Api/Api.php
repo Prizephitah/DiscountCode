@@ -16,9 +16,15 @@ class Api
     }
 
     public function getCode(ServerRequestInterface $request, ResponseInterface $response, string $brand, CodeController $codeController): ResponseInterface {
-        $code = $codeController->getCode($brand, 'user');
+        try {
+            $code = $codeController->getCode($brand, 'user');
 
-        $response->getBody()->write(json_encode(DiscountCode::fromModel($code)));
-        return $response->withHeader('Content-Type', 'application/json');
+            $response->getBody()->write(json_encode(DiscountCode::fromModel($code)));
+            return $response->withHeader('Content-Type', 'application/json');
+        } catch (\Throwable $t) {
+            //TODO Log error
+            $response->getBody()->write('Internal server error.');
+            return $response->withStatus(500);
+        }
     }
 }

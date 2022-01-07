@@ -2,16 +2,26 @@
 
 namespace Prizephitah\DiscountCode;
 
+use Prizephitah\DiscountCode\Database\DatabaseException;
 use Prizephitah\DiscountCode\Database\DatabaseInterface;
 
 class CodeController
 {
-    private DatabaseInterface $database;
+    protected DatabaseInterface $database;
+    protected CodeValidator $validator;
 
-    public function __construct(DatabaseInterface $database) {
+    public function __construct(DatabaseInterface $database, CodeValidator $validator) {
         $this->database = $database;
+        $this->validator = $validator;
     }
 
+    /**
+     * @param string $slug
+     * @param $userInfo
+     * @throws ValidationException When the available code fails validation.
+     * @throws DatabaseException When the database query causes an error.
+     * @return DiscountCode
+     */
     public function getCode(string $slug, $userInfo) {
         $statement = $this->database->prepare('
             SELECT "id", "name", "code"
@@ -24,6 +34,9 @@ class CodeController
         $statement->execute();
         $dbResult = $statement->fetch();
 
-        return DiscountCode::fromArray($dbResult);
+        $code = DiscountCode::fromArray($dbResult);
+        $this->validator->validate($code);
+
+        return $code;
     }
 }
