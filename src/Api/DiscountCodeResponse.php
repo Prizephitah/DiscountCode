@@ -2,7 +2,17 @@
 
 namespace Prizephitah\DiscountCode\Api;
 
-class DiscountCode implements \JsonSerializable
+use Prizephitah\DiscountCode\DiscountCode;
+
+/**
+ * @OA\Schema(
+ *     schema="DiscountCodeResponse",
+ *     title="A discount code",
+ *     @OA\Property(type="string", property="brandName"),
+ *     @OA\Property(type="string", property="code")
+ * )
+ */
+class DiscountCodeResponse implements \JsonSerializable
 {
     protected string $brandName;
     protected string $code;
@@ -29,7 +39,7 @@ class DiscountCode implements \JsonSerializable
         return $this->code;
     }
 
-    public static function fromModel(\Prizephitah\DiscountCode\DiscountCode $model): static
+    public static function fromModel(DiscountCode $model): static
     {
         return (new static())
             ->setBrandName($model->getBrandName())

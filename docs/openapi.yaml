@@ -1,0 +1,33 @@
+openapi: 3.1.0
+info:
+  title: 'DiscountCode REST API'
+  version: '1.0'
+paths:
+  '/discount-code/{brand}':
+    get:
+      summary: 'Get a discount code for a brand'
+      operationId: 697a8f44df6a1b34034fcb1f63e239f8
+      parameters:
+        -
+          name: brand
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'The discount code object'
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/DiscountCodeResponse'
+components:
+  schemas:
+    DiscountCodeResponse:
+      title: 'A discount code'
+      properties:
+        brandName:
+          type: string
+        code:
+          type: string
+      type: object
