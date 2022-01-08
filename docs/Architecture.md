@@ -16,12 +16,16 @@ Deployment diagram over the call to generate a discount code. Designed to show w
 ![Tech stack](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Prizephitah/DiscountCode/master/docs/GenerateCode.puml)
 
 ## Getting a code
+> As a logged in user I want to be able to get a discount code so that I can get a discount
+> on a purchase.
 
 Sequence diagram of how a discount code is fetched for a user.
 
 ![Tech stack](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Prizephitah/DiscountCode/master/docs/GetCode.puml)
 
 ## Notify of Usage
+> As a brand I want to be notified about a user getting a discount code so that I can
+> process information about the user for my loyalty programme.
 
 Sequence diagram that builds upon [Getting a code](#Getting a code) to show how notification to the Brand can be made.
 

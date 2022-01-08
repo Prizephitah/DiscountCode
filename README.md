@@ -1,7 +1,10 @@
 # Discount Code
-This is a small demo project to display my skills. The task was to design and 
-implement a system for discount codes. I've chosen to use PHP with the [Slim 4](https://www.slimframework.com/) 
-framework to do this. There is no UI, just an API. 
+This is a small demo project to display my skills in application architecture 
+and implementation based on requirements and user stories. The task was to 
+design and implement a system for discount codes. I've chosen to use PHP with 
+the [Slim 4](https://www.slimframework.com/) framework to do this. There is no UI, 
+just an API. No implementation is complete. Most pieces only exists as the basic core 
+of the intended result.
 
 ## Requirements
 * PHP 8.0+
