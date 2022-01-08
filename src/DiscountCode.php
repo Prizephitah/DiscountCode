@@ -16,7 +16,7 @@ class DiscountCode
 
     public function getId(): int
     {
-        return $this->id;
+        return $this->id ?? 0;
     }
 
     public function setBrandName(string $brandName): static
@@ -27,7 +27,7 @@ class DiscountCode
 
     public function getBrandName(): string
     {
-        return $this->brandName;
+        return $this->brandName ?? '';
     }
 
     public function setCode(string $code): static
@@ -38,7 +38,7 @@ class DiscountCode
 
     public function getCode(): string
     {
-        return $this->code;
+        return $this->code ?? '';
     }
 
     public static function fromArray(array $values): static

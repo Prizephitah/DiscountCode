@@ -1,13 +1,24 @@
 {
     "require": {
+        "php": "^8.0",
+        "ext-json": "*",
         "ext-mbstring": "*",
         "slim/slim": "4.*",
         "guzzlehttp/psr7": "^2",
         "php-di/slim-bridge": "^3.2"
     },
+    "require-dev": {
+        "ext-xml": "*",
+        "phpunit/phpunit": "^9.5"
+    },
     "autoload": {
         "psr-4": {
             "Prizephitah\\DiscountCode\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Prizephitah\\DiscountCode\\Test\\": "tests"
         }
     }
 }
