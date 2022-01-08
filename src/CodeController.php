@@ -17,12 +17,12 @@ class CodeController
 
     /**
      * @param string $slug
-     * @param $userInfo
+     * @param User $userInfo
      * @throws ValidationException When the available code fails validation.
      * @throws DatabaseException When the database query causes an error.
      * @return DiscountCode
      */
-    public function getCode(string $slug, $userInfo) {
+    public function getCode(string $slug, User $userInfo) {
         $statement = $this->database->prepare('
             SELECT "id", "name", "code"
             FROM "discount_codes"
@@ -36,6 +36,8 @@ class CodeController
 
         $code = DiscountCode::fromArray($dbResult);
         $this->validator->validate($code);
+
+        //TODO Store user info for brand
 
         return $code;
     }
